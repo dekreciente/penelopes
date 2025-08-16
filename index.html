@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Penelopes</title>
+  <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+ <header class="site-header">
+  <div class="header-content">
+    <a class="lang-pill" href="en/index.html">EN</a>  <!-- <— here -->
+    <nav class="nav">
+      <a href="valors.html">Valors</a>
+      <a href="quisom.html">Qui Som</a>
+      <a href="projectes.html" class="active">Projectes</a>
+      <a href="testimonis.html">Testimonis</a>
+    </nav>
+    <h1 class="title"><a href="index.html">Penelopes</a></h1>
+  </div>
+</header>
+
+    
+
+    <!-- Language switch -->
+<a class="lang-pill" href="#" id="langToggle" lang="en" hreflang="en">EN</a>
+
+  </header>
+
+  <main class="content">
+    <div class="content-wrapper">
+      <div class="rotated">
+        <p>
+          Integer et placerat us. In nec efficitur justo, sed maximus est. Ut ornare arcu eros, at condimentum enim imperdiet vitae. Morbi lorem augue, commodo vel ipsum ac, sollicitudin placerat urna. Praesent sit amet mauris
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ✅ Scroll color change script -->
+  <script>
+    window.addEventListener("scroll", () => {
+      const rotated = document.querySelector(".rotated");
+      if (!rotated) return;
+
+      const triggerPoint = 100;
+      if (window.scrollY > triggerPoint) {
+        rotated.classList.add("scrolled");
+      } else {
+        rotated.classList.remove("scrolled");
+      }
+    });
+  </script>
+
+  <script>
+
+</script>
+
+</body>
+</html>
