@@ -11,6 +11,8 @@
   box-sizing: border-box;
 }
 
+
+
 /* === GLOBAL VARIABLES === */
 :root {
   /* adjust these numbers as needed */
@@ -42,7 +44,7 @@ html, body {
 .lang-pill{
   position: absolute;
   top: 12px;
-  right: 12px;
+  right: 30px;
   z-index: 1000;
   display: inline-block;
   padding: 6px 14px;
@@ -88,7 +90,7 @@ html, body {
   justify-content: center;
   text-align: left;
   transition: background-color 0.3s ease;
-  
+
 }
 
 .header-content {
@@ -604,6 +606,125 @@ html, body {
     margin-top: 80px;          /* keep spacing pleasant */
   }
 }
+
+
+
+
+
+/* === TESTIMONIS PAGE === */
+
+/* same header distance as Valors/Projectes */
+.testimonis .content {
+  padding-top: calc(var(--header-gap) - 56px);
+}
+
+/* grid stack (single column, big vertical rhythm) */
+.t-grid {
+  display: grid;
+  gap: 120px;
+  align-items: start;
+  justify-items: center;
+  padding-bottom: 140px;
+}
+
+/* soft lilac card; tweak width if you want smaller/bigger */
+.t-card {
+  --rot: -5deg;                     /* per-card override inline */
+  background: #d9c0ff;              /* lilac against the pink */
+  color: #1d1333;
+  border-radius: 36px;
+  width: min(860px, 94vw);          /* <<< desktop size */
+  padding: clamp(22px, 4.2vw, 48px) clamp(20px, 4vw, 56px);
+  transform: rotate(var(--rot));
+  box-shadow: 0 16px 60px rgba(0,0,0,.20);
+}
+
+/* text inside cards */
+.t-name {
+  margin: 0 0 12px 0;
+  color: #1d1333;
+  font-size: clamp(20px, 2.2vw, 28px);
+  letter-spacing: .01em;
+}
+
+.t-quote {
+  margin: 0;
+  font-size: clamp(16px, 1.8vw, 22px);
+  line-height: 1.55;
+}
+
+.t-org {
+  display: block;
+  margin-top: 16px;
+  font-size: 12px;
+  opacity: .7;
+  text-align: center;
+}
+
+/* Tablet tweaks */
+@media (max-width: 1024px) {
+  .t-grid { gap: 90px; }
+  .t-card { width: min(760px, 94vw); border-radius: 28px; }
+}
+
+/* Phone tweaks: slightly smaller, lighter angles for readability */
+@media (max-width: 640px) {
+  .t-grid { gap: 64px; }
+  .t-card {
+    width: 92vw;
+    transform: rotate(calc(var(--rot) * 0.45)); /* reduce tilt on small screens */
+    border-radius: 22px;
+    padding: 18px 18px 22px;
+  }
+  .t-org { margin-top: 10px; }
+}
+
+
+/* Testimonis: more space below the fixed header on desktop */
+@media (min-width: 900px) {
+  .testimonis .content {
+    /* bump it by ~48px; tweak 32–72px if you want more/less */
+    padding-top: calc(var(--header-gap) + 48px) !important;
+  }
+}
+
+/* Phones/tablets: keep your existing tighter spacing */
+@media (max-width: 899px) {
+  .testimonis .content {
+    padding-top: calc(var(--header-gap) - 56px) !important;
+  }
+}
+
+/* Phones: give Testimonis comfy side gutters and size cards to the container */
+@media (max-width: 640px) {
+  /* add safe-area padding (iOS) + a minimum gutter */
+  .testimonis .content-wrapper {
+    padding-left:  max(8px, env(safe-area-inset-left));
+    padding-right: max(22px, env(safe-area-inset-right));
+  }
+
+  /* make cards use the wrapper width (not vw),
+     cap their max width, and reduce the tilt a bit */
+  .testimonis .testimonial-card {
+    width: 100% !important;         /* ignore any 92vw/min(...) styles */
+    max-width: 620px !important;     /* cap so they don't get huge */
+    margin-inline: auto;             /* center within the padded wrapper */
+    --rot: -2deg;                    /* gentler tilt on mobile */
+    transform: rotate(var(--rot));
+    border-radius: 18px;
+  }
+
+  /* tiny balancing nudge so corners don’t touch the edge visually */
+  .testimonis .testimonial-card:nth-child(odd)  { transform: rotate(var(--rot)) translateX(-4px); }
+  .testimonis .testimonial-card:nth-child(even) { transform: rotate(calc(var(--rot) * -1)) translateX(4px); }
+}
+
+
+
+
+
+
+
 
 
 
