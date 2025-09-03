@@ -1,54 +1,138 @@
 <!DOCTYPE html>
-<html lang="ca" class="quisom">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Qui Som — Les Penelopes</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body class="quisom">
+<html class="quisom" lang="ca">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Qui Som — Penelopes
+  </title>
+  <link href="style.css" rel="stylesheet"/>
+ </head>
+ <body class="quisom">
   <!-- Fixed header (same as the rest of the site) -->
   <header class="site-header">
-    <div class="header-content">
-      <nav class="nav">
-        <a href="valors.html">Valors</a>
-        <a href="quisom.html" class="active">Qui Som</a>
-        <a href="projectes.html">Projectes</a>
-        <a href="testimonis.html">Testimonis</a>
-      </nav>
-      <h1 class="title"><a href="index.html">Penelopes</a></h1>
-    </div>
+   <a class="lang-pill" href="#" hreflang="en" id="langToggle" lang="en">
+    EN
+   </a>
+   <div class="header-content">
+    <nav class="nav">
+     <a data-i18n="nav.quefem" href="valors.html">
+      Què fem
+     </a>
+     <a class="active" data-i18n="nav.quisom" href="quisom.html">
+      Qui Som
+     </a>
+     <a data-i18n="nav.projectes" href="projectes.html">
+      Projectes
+     </a>
+     <a data-i18n="nav.testimonis" href="testimonis.html">
+      Testimonis
+     </a>
+    </nav>
+    <h1 class="title" data-i18n="site.title">
+     <a href="index.html">
+      Penelopes
+     </a>
+    </h1>
+   </div>
   </header>
-
   <main class="content">
-    <div class="content-wrapper">
-      <section class="qs-stack">
-        <!-- Card 1 -->
-        <article class="qs-card" style="--rot:-8deg; --y:0px;">
-          <header class="qs-card-head">Laia</header>
-          <div class="qs-card-body">
-            <p>Direcció creativa, conceptualització i producció.</p>
-          </div>
-        </article>
-
-        <!-- Card 2 -->
-        <article class="qs-card" style="--rot:12deg; --y:120px;">
-          <header class="qs-card-head">Catalina</header>
-          <div class="qs-card-body">
-            <p>Coordinació, recerca i relació amb institucions.</p>
-          </div>
-        </article>
-
-        <!-- Card 3 (contacte) -->
-        <article class="qs-card" style="--rot:-10deg; --y:260px;">
-          <header class="qs-card-head">CONTACTE</header>
-          <div class="qs-card-body">
-            <p><a class="qs-mail" href="mailto:hola@lespenelopes.cat">hola@lespenelopes.cat</a></p>
-          </div>
-        </article>
-      </section>
-
-    </div>
+   <div class="content-wrapper">
+    <section class="qs-stack">
+     <!-- Card 1 -->
+     <article class="qs-card" style="--rot:-8deg; --y:0px;">
+      <header class="qs-card-head">
+       Laia Seró i Catalina Serra
+      </header>
+      <div class="qs-card-body">
+       <p data-i18n="quisom.card1.role">
+        Direcció creativa, conceptualització i producció.
+        Direcció creativa, conceptualització i producció.
+        Direcció creativa, conceptualització i producció.
+       </p>
+      </div>
+     </article>
+     <!-- Card 2 -->
+     <article class="qs-card" style="--rot:12deg; --y:120px;">
+      <header class="qs-card-head">
+       Col·laboradores
+      </header>
+      <div class="qs-card-body">
+       <p data-i18n="quisom.card2.role">
+        Neus Arqués, Maria Costa, Marta Font...
+       </p>
+      </div>
+     </article>
+     <!-- Card 3 (contacte) -->
+     <article class="qs-card" style="--rot:-10deg; --y:260px;">
+      <header class="qs-card-head">
+       CONTACTE
+      </header>
+      <div class="qs-card-body">
+       <p>
+        <a class="qs-mail" href="mailto:hola@lespenelopes.cat">
+         hola@lespenelopes.cat
+        </a>
+       </p>
+      </div>
+     </article>
+    </section>
+   </div>
   </main>
-</body>
+  <script>
+   (function(){
+  var LANGS = ['ca','en'];
+  function getLang(){
+    var p = new URLSearchParams(location.search).get('lang');
+    if (p && LANGS.includes(p)) return p;
+    var s = localStorage.getItem('lang');
+    if (s && LANGS.includes(s)) return s;
+    return 'ca';
+  }
+  function setLang(lang){
+    localStorage.setItem('lang', lang);
+    var url = new URL(location.href);
+    url.searchParams.set('lang', lang);
+    location.replace(url.toString());
+  }
+  function apply(dict){
+    try { document.documentElement.setAttribute('lang', current); } catch(e) {}
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if (dict[key]) el.textContent = dict[key];
+    });
+    // update pill label
+    var pill = document.getElementById('langToggle') || document.querySelector('.lang-pill');
+    if (pill){
+      var next = (current==='ca' ? 'EN' : 'CA');
+      pill.textContent = next;
+      pill.setAttribute('lang', current==='ca' ? 'en' : 'ca');
+      pill.setAttribute('hreflang', current==='ca' ? 'en' : 'ca');
+    }
+  }
+  var current = getLang();
+  var loc = 'locales/' + current + '.json';
+  fetch(loc).then(function(r){return r.json();}).then(function(dict){ apply(dict); });
+  document.addEventListener('DOMContentLoaded', function(){
+    var pill = document.getElementById('langToggle') || document.querySelector('.lang-pill');
+    if (pill){
+      pill.addEventListener('click', function(ev){
+        ev.preventDefault();
+        setLang(current==='ca' ? 'en' : 'ca');
+      });
+    }
+  });
+})();
+  </script>
+
+  <footer class="minimal-footer">
+  <div class="footer-container">
+    <span>© 2025 Penelopes</span>
+    <span>1234 Carrer Fictici, Barcelona, Catalunya</span>
+    <a href="mailto:penelopes@gmail.com">penelopes@gmail.com</a>
+    <a href="https://instagram.com/lespenelopes" target="_blank">Instagram</a>
+  </div>
+</footer>
+
+ </body>
 </html>

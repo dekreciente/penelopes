@@ -11,8 +11,6 @@
   box-sizing: border-box;
 }
 
-
-
 /* === GLOBAL VARIABLES === */
 :root {
   /* adjust these numbers as needed */
@@ -32,12 +30,11 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: 'AlteHaasGrotesk', sans-serif !important;
-  background-color: #ff5ec4;
+  background-color: #E3609F;
   color: #111;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
-
 
 /* === Boton cambiar idioma === */
 /* Default: top right for desktops */
@@ -50,14 +47,14 @@ html, body {
   padding: 6px 14px;
   border-radius: 30px;
   background-color: #fff9b0;
-  color: #ff5ec4;
+  color: #E3609F;
   text-decoration: none;
   font-size: 16px;
   line-height: 1;
   white-space: nowrap;
   transition: all .25s ease;
 }
-.lang-pill:hover{ background:#ff5ec4; color:#fff9b0; }
+.lang-pill:hover{ background:#E3609F; color:#fff9b0; }
 
 /* On smartphones: fix it bottom-right instead */
 @media (max-width: 768px) {
@@ -72,11 +69,6 @@ html, body {
   }
 }
 
-
-
-
-
-
 /* Fixed Header */
 .site-header {
   position: fixed;
@@ -90,7 +82,7 @@ html, body {
   justify-content: center;
   text-align: left;
   transition: background-color 0.3s ease;
-
+  background-color: #E3609F;
 }
 
 .header-content {
@@ -119,7 +111,7 @@ html, body {
 
 .nav a:hover {
   background-color: #fff9b0;
-  color: #ff5ec4;
+  color: #E3609F;
 }
 
 .title {
@@ -127,6 +119,7 @@ html, body {
   font-weight: normal;
   color: #fff9b0;
   margin: 0;
+  font-weight: 800px;
 }
 
 .title a {
@@ -181,7 +174,7 @@ html, body {
 }
 
 .valors-number {
-  font-size: 8rem;
+  font-size: 4rem;
   color: #fff9b0;
   position: absolute;
   top: 0;
@@ -190,17 +183,14 @@ html, body {
   pointer-events: none;
   animation: spin360 15s linear infinite;
   transform-origin: center;
+  transform: rotate(-6deg);
+  transform-origin: left center;
 }
 
 .valors-text {
   font-size: 1.2rem;
   line-height: 1.6;
   color: #fff9b0;
-}
-
-@keyframes spin360 {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }
 
 /* ===== PROJECTES PAGE ===== */
@@ -245,7 +235,6 @@ html, body {
   transform: translateY(-2px);
   transition: transform 0.25s ease;
 }
-
 
 .project-card { color: #fff9b0; }
 .project-title {
@@ -426,7 +415,7 @@ html, body {
   padding: 10px 22px;
   border-radius: 30px;
   background-color: #fff9b0;
-  color: #ff5ec4;
+  color: #E3609F;
   font-size: 20px;
   text-decoration: none;
   transition: all 0.25s ease;
@@ -472,8 +461,6 @@ html, body {
   }
 }
 
-
-
 /* =========================
    QUI SOM (team cards)
    ========================= */
@@ -491,7 +478,7 @@ html, body {
   --y: 0px;
 
   width: clamp(280px, 60vw, 560px);   /* was min(760px, 92vw) */
-  background: #fff9b0;
+  background: #ffd1ec;
   color: #111;
   border-radius: 22px;                /* was 30px */
   padding: clamp(14px, 2.4vw, 22px) clamp(16px, 3vw, 26px);
@@ -502,11 +489,9 @@ html, body {
   text-align: center;
 }
 
-
 .qs-card + .qs-card { margin-top: 80px; }
 
 .qs-card:hover {
-  transform: translateY(calc(var(--y) - 4px)) rotate(var(--rot));
   box-shadow: 0 22px 60px rgba(0,0,0,0.22);
 }
 
@@ -528,7 +513,7 @@ html, body {
   text-decoration-thickness: 2px;
   text-underline-offset: 3px;
 }
-.qs-mail:hover { color: #ff5ec4; }
+.qs-mail:hover { color: #E3609F; }
 
 /* squiggly connectors (desktop only) */
 .qs-squigs {
@@ -568,6 +553,7 @@ html, body {
     width: 92vw;
     border-radius: 22px;
     transform: translateY(0) rotate(-2deg) !important; /* gentle tilt */
+    /* keep cards closer on mobile */
   }
   .qs-card + .qs-card { margin-top: 26px; }
   .qs-card-head { padding: 16px 18px 4px; }
@@ -582,12 +568,12 @@ html, body {
   .quisom .content-wrapper { margin-top: 0 !important; }
 }
 
-/* QUI SOM: more space under the header */
-.quisom .content {
-  padding-top: calc(var(--header-gap) + 48px) !important; /* tweak +48px */
+/* QUI SOM: more space under the header (desktop), tighter on small screens */
+@media (min-width: 900px) {
+  .quisom .content {
+    padding-top: calc(var(--header-gap) + 72px) !important;
+  }
 }
-
-/* Phones: keep it tight */
 @media (max-width: 768px) {
   .quisom .content {
     padding-top: calc(var(--header-gap) - 24px) !important;
@@ -607,13 +593,9 @@ html, body {
   }
 }
 
-
-
-
-
 /* === TESTIMONIS PAGE === */
 
-/* same header distance as Valors/Projectes */
+/* same header distance as Valors/Projectes (base) */
 .testimonis .content {
   padding-top: calc(var(--header-gap) - 56px);
 }
@@ -679,12 +661,10 @@ html, body {
   .t-org { margin-top: 10px; }
 }
 
-
 /* Testimonis: more space below the fixed header on desktop */
 @media (min-width: 900px) {
   .testimonis .content {
-    /* bump it by ~48px; tweak 32–72px if you want more/less */
-    padding-top: calc(var(--header-gap) + 48px) !important;
+    padding-top: calc(var(--header-gap) + 96px) !important;
   }
 }
 
@@ -695,40 +675,126 @@ html, body {
   }
 }
 
-/* Phones: give Testimonis comfy side gutters and size cards to the container */
+/* Phones: comfy side gutters and card sizing inside wrapper */
 @media (max-width: 640px) {
-  /* add safe-area padding (iOS) + a minimum gutter */
   .testimonis .content-wrapper {
     padding-left:  max(8px, env(safe-area-inset-left));
     padding-right: max(22px, env(safe-area-inset-right));
   }
 
-  /* make cards use the wrapper width (not vw),
-     cap their max width, and reduce the tilt a bit */
   .testimonis .testimonial-card {
-    width: 100% !important;         /* ignore any 92vw/min(...) styles */
-    max-width: 620px !important;     /* cap so they don't get huge */
-    margin-inline: auto;             /* center within the padded wrapper */
-    --rot: -2deg;                    /* gentler tilt on mobile */
+    width: 100% !important;
+    max-width: 620px !important;
+    margin-inline: auto;
+    --rot: -2deg;
     transform: rotate(var(--rot));
     border-radius: 18px;
   }
 
-  /* tiny balancing nudge so corners don’t touch the edge visually */
   .testimonis .testimonial-card:nth-child(odd)  { transform: rotate(var(--rot)) translateX(-4px); }
   .testimonis .testimonial-card:nth-child(even) { transform: rotate(calc(var(--rot) * -1)) translateX(4px); }
 }
 
+/* === Allow last items on every main page to scroll to the very top === */
 
+/* Testimonis */
+.testimonis .t-grid::after {
+  content: "";
+  display: block;
+  height: calc(100vh - var(--header-gap));
+}
 
+/* Projectes (grid) */
+.projectes .projects-grid::after {
+  content: "";
+  display: block;
+  height: calc(100vh - var(--header-gap));
+}
 
+/* Valors (grid) */
+.valors .valors-grid::after {
+  content: "";
+  display: block;
+  height: calc(100vh - var(--header-gap));
+}
 
+/* Qui Som (stack of cards) */
+.quisom .qs-stack::after {
+  content: "";
+  display: block;
+  /* more tail room so the last card can scroll under the fixed header */
+  height: max(40vh, calc(100vh - var(--header-gap) + 120px));
+}
 
+.quisom .qs-card {
+  scroll-margin-top: calc(var(--header-gap) + 72px);
+}
+/* Single Projecte template */
+.projecte .content-wrapper::after {
+  content: "";
+  display: block;
+  height: calc(100vh - var(--header-gap));
+}
 
+/* On phones, we don’t need as much tail space */
+@media (max-width: 640px) {
+  .quisom .qs-stack::after {
+    height: max(24vh, calc(100vh - var(--header-gap) + 40px));
+  }
+  .quisom .qs-card {
+    scroll-margin-top: calc(var(--header-gap) - 12px);
+  }
+}
 
+/* (Removed conflicting global override that forced padding-top:0 and margin-top:300px) */
 
+/* === Footer === */
+.minimal-footer {
+  background-color: #E3609F;
+  color: #fff9b0;
+  font-family: 'AlteHaasGrotesk', sans-serif;
+  font-size: 14px;
+  padding: 20px 0;
+}
 
+.footer-container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
 
+.footer-container a {
+  color: #fff9b0;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
 
+.footer-container a:hover {
+  color: #ffffff;
+}
 
+/* === Responsive Styles === */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .minimal-footer {
+    font-size: 12px;
+    padding: 15px 0;
+  }
+
+  .footer-container {
+    gap: 8px;
+  }
+}
 

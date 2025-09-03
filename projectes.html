@@ -1,104 +1,188 @@
 <!DOCTYPE html>
 <html lang="ca">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Projectes — Penelopes</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body class="projectes">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Projectes — Penelopes
+  </title>
+  <link href="style.css" rel="stylesheet"/>
+ </head>
+ <body class="projectes">
   <!-- Fixed header -->
   <header class="site-header">
-    <div class="header-content">
-      <nav class="nav">
-        <a href="valors.html">Valors</a>
-        <a href="quisom.html">Qui Som</a>
-        <a href="projectes.html" class="active">Projectes</a>
-        <a href="testimonis.html">Testimonis</a>
-      </nav>
-      <h1 class="title"><a href="index.html">Penelopes</a></h1>
-    </div>
+   <a class="lang-pill" href="#" hreflang="en" id="langToggle" lang="en">
+    EN
+   </a>
+   <div class="header-content">
+    <nav class="nav">
+     <a data-i18n="nav.quefem" href="valors.html">
+      Què fem
+     </a>
+     <a data-i18n="nav.quisom" href="quisom.html">
+      Qui Som
+     </a>
+     <a class="active" data-i18n="nav.projectes" href="projectes.html">
+      Projectes
+     </a>
+     <a data-i18n="nav.testimonis" href="testimonis.html">
+      Testimonis
+     </a>
+    </nav>
+    <h1 class="title" data-i18n="site.title">
+     <a href="index.html">
+      Penelopes
+     </a>
+    </h1>
+   </div>
   </header>
-
   <main class="content">
-    <div class="content-wrapper">
-      <section class="projects-grid">
-
-        <!-- Card 1 -->
-        <article class="project-card">
-          <a href="projecte_01.html" class="project-link">
-            <h3 class="project-title">Museu Marítim</h3>
-            <div class="project-meta">
-              <!-- Curved label -->
-              <svg class="project-arc" viewBox="0 0 400 120" aria-hidden="true">
-                <defs>
-                  <path id="arcPath1" d="M30,90 C150,10 250,10 370,90" />
-                </defs>
-                <text dy="-6">
-                  <textPath startOffset="0%" href="#arcPath1">Institució</textPath>
-                </text>
-                <text dy="-6">
-                  <textPath startOffset="55%" href="#arcPath1">Macba</textPath>
-                </text>
-              </svg>
-              <span class="project-year">2025</span>
-            </div>
-            <figure class="project-media">
-              <img src="images/test_image_projectes.jpg" alt="Museu Marítim" />
-            </figure>
-          </a>
-        </article>
-
-        <!-- Card 2 -->
-        <article class="project-card">
-          <a href="projecte_02.html" class="project-link">
-            <h3 class="project-title">Projecte 2</h3>
-            <div class="project-meta">
-              <svg class="project-arc" viewBox="0 0 400 120" aria-hidden="true">
-                <defs>
-                  <path id="arcPath2" d="M30,90 C150,10 250,10 370,90" />
-                </defs>
-                <text dy="-6">
-                  <textPath startOffset="0%" href="#arcPath2">Institució</textPath>
-                </text>
-                <text dy="-6">
-                  <textPath startOffset="55%" href="#arcPath2">Macba</textPath>
-                </text>
-              </svg>
-              <span class="project-year">2024</span>
-            </div>
-            <figure class="project-media">
-              <img src="images/test_image_projectes.jpg" alt="Projecte 2" />
-            </figure>
-          </a>
-        </article>
-
-        <!-- Card 3 -->
-        <article class="project-card">
-          <a href="projecte_03.html" class="project-link">
-            <h3 class="project-title">Projecte 3</h3>
-            <div class="project-meta">
-              <svg class="project-arc" viewBox="0 0 400 120" aria-hidden="true">
-                <defs>
-                  <path id="arcPath3" d="M30,90 C150,10 250,10 370,90" />
-                </defs>
-                <text dy="-6">
-                  <textPath startOffset="0%" href="#arcPath3">Institució</textPath>
-                </text>
-                <text dy="-6">
-                  <textPath startOffset="55%" href="#arcPath3">Macba</textPath>
-                </text>
-              </svg>
-              <span class="project-year">2023</span>
-            </div>
-            <figure class="project-media">
-              <img src="images/test_image_projectes.jpg" alt="Projecte 3" />
-            </figure>
-          </a>
-        </article>
-
-      </section>
-    </div>
+   <div class="content-wrapper">
+    <section class="projects-grid">
+     <!-- Card 1 -->
+     <article class="project-card">
+      <a class="project-link" href="projecte_01.html">
+       <h3 class="project-title">
+        Museu Marítim
+       </h3>
+       <div class="project-meta">
+        <!-- Curved label -->
+        <svg aria-hidden="true" class="project-arc" viewbox="0 0 400 120">
+         <defs>
+          <path d="M30,90 C150,10 250,10 370,90" id="arcPath1">
+          </path>
+         </defs>
+         <text dy="-6">
+          <textpath href="#arcPath1" startoffset="0%">
+           Institució
+          </textpath>
+         </text>
+         <text dy="-6">
+          <textpath href="#arcPath1" startoffset="55%">
+           Macba
+          </textpath>
+         </text>
+        </svg>
+        <span class="project-year">
+         2025
+        </span>
+       </div>
+       <figure class="project-media">
+        <img alt="Museu Marítim" src="images/test_image_projectes.jpg"/>
+       </figure>
+      </a>
+     </article>
+     <!-- Card 2 -->
+     <article class="project-card">
+      <a class="project-link" href="projecte_02.html">
+       <h3 class="project-title">
+        Projecte 2
+       </h3>
+       <div class="project-meta">
+        <svg aria-hidden="true" class="project-arc" viewbox="0 0 400 120">
+         <defs>
+          <path d="M30,90 C150,10 250,10 370,90" id="arcPath2">
+          </path>
+         </defs>
+         <text dy="-6">
+          <textpath href="#arcPath2" startoffset="0%">
+           Institució
+          </textpath>
+         </text>
+         <text dy="-6">
+          <textpath href="#arcPath2" startoffset="55%">
+           Macba
+          </textpath>
+         </text>
+        </svg>
+        <span class="project-year">
+         2024
+        </span>
+       </div>
+       <figure class="project-media">
+        <img alt="Projecte 2" src="images/test_image_projectes.jpg"/>
+       </figure>
+      </a>
+     </article>
+     <!-- Card 3 -->
+     <article class="project-card">
+      <a class="project-link" href="projecte_03.html">
+       <h3 class="project-title">
+        Projecte 3
+       </h3>
+       <div class="project-meta">
+        <svg aria-hidden="true" class="project-arc" viewbox="0 0 400 120">
+         <defs>
+          <path d="M30,90 C150,10 250,10 370,90" id="arcPath3">
+          </path>
+         </defs>
+         <text dy="-6">
+          <textpath href="#arcPath3" startoffset="0%">
+           Institució
+          </textpath>
+         </text>
+         <text dy="-6">
+          <textpath href="#arcPath3" startoffset="55%">
+           Macba
+          </textpath>
+         </text>
+        </svg>
+        <span class="project-year">
+         2023
+        </span>
+       </div>
+       <figure class="project-media">
+        <img alt="Projecte 3" src="images/test_image_projectes.jpg"/>
+       </figure>
+      </a>
+     </article>
+    </section>
+   </div>
   </main>
-</body>
+  <script>
+   (function(){
+  var LANGS = ['ca','en'];
+  function getLang(){
+    var p = new URLSearchParams(location.search).get('lang');
+    if (p && LANGS.includes(p)) return p;
+    var s = localStorage.getItem('lang');
+    if (s && LANGS.includes(s)) return s;
+    return 'ca';
+  }
+  function setLang(lang){
+    localStorage.setItem('lang', lang);
+    var url = new URL(location.href);
+    url.searchParams.set('lang', lang);
+    location.replace(url.toString());
+  }
+  function apply(dict){
+    try { document.documentElement.setAttribute('lang', current); } catch(e) {}
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if (dict[key]) el.textContent = dict[key];
+    });
+    // update pill label
+    var pill = document.getElementById('langToggle') || document.querySelector('.lang-pill');
+    if (pill){
+      var next = (current==='ca' ? 'EN' : 'CA');
+      pill.textContent = next;
+      pill.setAttribute('lang', current==='ca' ? 'en' : 'ca');
+      pill.setAttribute('hreflang', current==='ca' ? 'en' : 'ca');
+    }
+  }
+  var current = getLang();
+  var loc = 'locales/' + current + '.json';
+  fetch(loc).then(function(r){return r.json();}).then(function(dict){ apply(dict); });
+  document.addEventListener('DOMContentLoaded', function(){
+    var pill = document.getElementById('langToggle') || document.querySelector('.lang-pill');
+    if (pill){
+      pill.addEventListener('click', function(ev){
+        ev.preventDefault();
+        setLang(current==='ca' ? 'en' : 'ca');
+      });
+    }
+  });
+})();
+  </script>
+ </body>
 </html>

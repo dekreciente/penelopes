@@ -1,44 +1,118 @@
 <!DOCTYPE html>
 <html lang="ca">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Penelopes</title>
-  <link rel="stylesheet" href="style.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-</head>
-<body>
- <header class="site-header">
-  <div class="header-content">
-    <a class="lang-pill" href="en/index.html">EN</a>  <!-- <— here -->
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Penelopes
+  </title>
+  <link href="style.css" rel="stylesheet"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+ </head>
+ <body>
+  <header class="site-header">
+   <div class="header-content">
+<!-- <— here -->
     <nav class="nav">
-      <a href="valors.html">Valors</a>
-      <a href="quisom.html">Qui Som</a>
-      <a href="projectes.html" >Projectes</a>
-      <a href="testimonis.html">Testimonis</a>
+     <a data-i18n="nav.quefem" href="valors.html">
+      què fem
+     </a>
+     <a data-i18n="nav.quisom" href="quisom.html">
+      qui Som
+     </a>
+     <a data-i18n="nav.projectes" href="projectes.html">
+      projectes
+     </a>
+     <a data-i18n="nav.testimonis" href="testimonis.html">
+      testimonis
+     </a>
     </nav>
-    <h1 class="title"><a href="index.html">Penelopes</a></h1>
-  </div>
-</header>
-
-    
-
-    <!-- Language switch -->
-<a class="lang-pill" href="#" id="langToggle" lang="en" hreflang="en">EN</a>
-
+    <h1 class="title" data-i18n="site.title">
+     <a href="index.html">
+      penelopes
+     </a>
+    </h1>
+   </div>
   </header>
-
+  <!-- Language switch -->
+  <a class="lang-pill" href="#" hreflang="en" id="langToggle" lang="en">
+   EN
+  </a>
   <main class="content">
-    <div class="content-wrapper">
-      <div class="rotated">
-        <p>
-          Integer et placerat us. In nec efficitur justo, sed maximus est. Ut ornare arcu eros, at condimentum enim imperdiet vitae. Morbi lorem augue, commodo vel ipsum ac, sollicitudin placerat urna. Praesent sit amet mauris
-        </p>
-      </div>
+   <div class="content-wrapper">
+    <div class="rotated">
+     <p data-i18n="intro.penelopes">
+      Som les Penelopes un...Som les Penelopes un...Som les Penelopes un...Som les Penelopes un...Som les Penelopes un...Som les Penelopes un...Som les Penelopes un...Som les Penelopes un...Som les Penelopes un...
+     </p>
     </div>
+   </div>
+
+
+
+
+
+   
   </main>
+  <script>
+   (function(){
+  var LANGS = ['ca','en'];
+  function getLang(){
+    var p = new URLSearchParams(location.search).get('lang');
+    if (p && LANGS.includes(p)) return p;
+    var s = localStorage.getItem('lang');
+    if (s && LANGS.includes(s)) return s;
+    return 'ca';
+  }
+  function setLang(lang){
+    localStorage.setItem('lang', lang);
+    var url = new URL(location.href);
+    url.searchParams.set('lang', lang);
+    location.replace(url.toString());
+  }
+  function apply(dict){
+    try { document.documentElement.setAttribute('lang', current); } catch(e) {}
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if (dict[key]) el.textContent = dict[key];
+    });
+    // update pill label
+    var pill = document.getElementById('langToggle') || document.querySelector('.lang-pill');
+    if (pill){
+      var next = (current==='ca' ? 'EN' : 'CA');
+      pill.textContent = next;
+      pill.setAttribute('lang', current==='ca' ? 'en' : 'ca');
+      pill.setAttribute('hreflang', current==='ca' ? 'en' : 'ca');
+    }
+  }
+  var current = getLang();
+  var loc = 'locales/' + current + '.json';
+  fetch(loc).then(function(r){return r.json();}).then(function(dict){ apply(dict); });
+  document.addEventListener('DOMContentLoaded', function(){
+    var pill = document.getElementById('langToggle') || document.querySelector('.lang-pill');
+    if (pill){
+      pill.addEventListener('click', function(ev){
+        ev.preventDefault();
+        setLang(current==='ca' ? 'en' : 'ca');
+      });
+    }
+  });
+})();
+  </script>
+
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <h2 class="footer-title">Penelopes</h2>
+    <ul class="footer-links">
+      <li><a href="mailto:penelopes@gmail.com">penelopes@gmail.com</a></li>
+      <li><a href="https://instagram.com/lespenelopes" target="_blank">@lespenelopes</a></li>
+      <li>1234 Carrer Fictici, Barcelona, Catalunya</li>
+    </ul>
+  </div>
+</footer>
 
 
 
-</body>
+
+ </body>
 </html>

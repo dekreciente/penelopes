@@ -1,85 +1,144 @@
 <!DOCTYPE html>
 <html lang="ca">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Projecte — Les Penelopes</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body class="projecte">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Projecte — Les Penelopes
+  </title>
+  <link href="style.css" rel="stylesheet"/>
+ </head>
+ <body class="projecte">
   <!-- Fixed header -->
   <header class="site-header">
-    <div class="header-content">
-      <nav class="nav">
-        <a href="valors.html">Valors</a>
-        <a href="quisom.html">Qui Som</a>
-        <a href="projectes.html" class="active">Projectes</a>
-        <a href="testimonis.html">Testimonis</a>
-      </nav>
-      <h1 class="title"><a href="index.html">Les Penelopes</a></h1>
-    </div>
+   <a class="lang-pill" href="#" hreflang="en" id="langToggle" lang="en">
+    EN
+   </a>
+   <div class="header-content">
+    <nav class="nav">
+     <a data-i18n="nav.quefem" href="valors.html">
+      Valors
+     </a>
+     <a data-i18n="nav.quisom" href="quisom.html">
+      Qui Som
+     </a>
+     <a class="active" data-i18n="nav.projectes" href="projectes.html">
+      Projectes
+     </a>
+     <a data-i18n="nav.testimonis" href="testimonis.html">
+      Testimonis
+     </a>
+    </nav>
+    <h1 class="title" data-i18n="site.title">
+     <a href="index.html">
+      Les Penelopes
+     </a>
+    </h1>
+   </div>
   </header>
-
   <main class="content">
-    <div class="content-wrapper">
-
-      
-
-      <!-- Header band: big number + title/year -->
-      <section class="proj-head">
-        <div class="proj-num">01</div>
-        <div class="proj-meta">
-          <h2 class="proj-title">Museu Marítim</h2>
-          <p class="proj-year">2025</p>
-        </div>
-      </section>
-
-      <!-- Section 1 — text left, image right -->
-      <section class="proj-row">
-        <div class="proj-left">
-          <div class="proj-intro">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nisl metus, accumsan id eros id,
+   <div class="content-wrapper">
+    <!-- Header band: big number + title/year -->
+    <section class="proj-head">
+     <div class="proj-num">
+      01
+     </div>
+     <div class="proj-meta">
+      <h2 class="proj-title" data-i18n="heading.museu_marítim">
+       Museu Marítim
+      </h2>
+      <p class="proj-year">
+       2025
+      </p>
+     </div>
+    </section>
+    <!-- Section 1 — text left, image right -->
+    <section class="proj-row">
+     <div class="proj-left">
+      <div class="proj-intro">
+       <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nisl metus, accumsan id eros id,
               vehicula tincidunt nisl. Nulla sit amet urna ut mi tempor euismod. Fusce elementum sapien eget
               elit sodales fringilla. Pellentesque et nulla vel velit malesuada fermentum vitae vitae justo.
               Nulla dignissim volutpat interdum.
-            </p>
-            <p>
-              Pellentesque at molestie tortor. Proin magna ante, fermentum ac elementum at, lacinia et arcu.
+       </p>
+       <p>
+        Pellentesque at molestie tortor. Proin magna ante, fermentum ac elementum at, lacinia et arcu.
               Donec accumsan feugiat varius. Etiam ac libero at lectus blandit vulputate. Integer scelerisque,
               velit vitae accumsan tempor, quam ex vestibulum elit.
-            </p>
-          </div>
-        </div>
-
-        <figure class="proj-right tone-pink">
-          <img src="images/test_image_projectes.jpg" alt="Imatge del projecte" />
-        </figure>
-      </section>
-
-      <!-- Section 2 — text left, image right -->
-      <section class="proj-row">
-        <div class="proj-left">
-          <div class="proj-intro">
-            <p>
-              Més contingut del projecte. Integer scelerisque, velit vitae accumsan tempor, quam ex vestibulum
+       </p>
+      </div>
+     </div>
+     <figure class="proj-right tone-pink">
+      <img alt="Imatge del projecte" src="images/test_image_projectes.jpg"/>
+     </figure>
+    </section>
+    <!-- Section 2 — text left, image right -->
+    <section class="proj-row">
+     <div class="proj-left">
+      <div class="proj-intro">
+       <p>
+        Més contingut del projecte. Integer scelerisque, velit vitae accumsan tempor, quam ex vestibulum
               elit, eget volutpat elit ipsum id ante. Donec accumsan feugiat varius.
-            </p>
-          </div>
-        </div>
-
-        <figure class="proj-right tone-pink">
-          <img src="images/test_image_projectes.jpg" alt="Detall del projecte" />
-        </figure>
-      </section>
-
-
-      <!-- Bottom navigation -->
-      <nav class="project-nav">
-        <a class="back-button" href="projectes.html">← Tots els projectes</a>
-      </nav>
-
-    </div>
+       </p>
+      </div>
+     </div>
+     <figure class="proj-right tone-pink">
+      <img alt="Detall del projecte" src="images/test_image_projectes.jpg"/>
+     </figure>
+    </section>
+    <!-- Bottom navigation -->
+    <nav class="project-nav">
+     <a class="back-button" data-i18n="nav.projectes" href="projectes.html">
+      ← Tots els projectes
+     </a>
+    </nav>
+   </div>
   </main>
-</body>
+  <script>
+   (function(){
+  var LANGS = ['ca','en'];
+  function getLang(){
+    var p = new URLSearchParams(location.search).get('lang');
+    if (p && LANGS.includes(p)) return p;
+    var s = localStorage.getItem('lang');
+    if (s && LANGS.includes(s)) return s;
+    return 'ca';
+  }
+  function setLang(lang){
+    localStorage.setItem('lang', lang);
+    var url = new URL(location.href);
+    url.searchParams.set('lang', lang);
+    location.replace(url.toString());
+  }
+  function apply(dict){
+    try { document.documentElement.setAttribute('lang', current); } catch(e) {}
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if (dict[key]) el.textContent = dict[key];
+    });
+    // update pill label
+    var pill = document.getElementById('langToggle') || document.querySelector('.lang-pill');
+    if (pill){
+      var next = (current==='ca' ? 'EN' : 'CA');
+      pill.textContent = next;
+      pill.setAttribute('lang', current==='ca' ? 'en' : 'ca');
+      pill.setAttribute('hreflang', current==='ca' ? 'en' : 'ca');
+    }
+  }
+  var current = getLang();
+  var loc = 'locales/' + current + '.json';
+  fetch(loc).then(function(r){return r.json();}).then(function(dict){ apply(dict); });
+  document.addEventListener('DOMContentLoaded', function(){
+    var pill = document.getElementById('langToggle') || document.querySelector('.lang-pill');
+    if (pill){
+      pill.addEventListener('click', function(ev){
+        ev.preventDefault();
+        setLang(current==='ca' ? 'en' : 'ca');
+      });
+    }
+  });
+})();
+  </script>
+ </body>
 </html>

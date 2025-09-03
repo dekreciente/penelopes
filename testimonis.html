@@ -1,75 +1,147 @@
 <!DOCTYPE html>
 <html lang="ca">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Testimonis — Les Penelopes</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body class="testimonis">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Testimonis — Penelopes
+  </title>
+  <link href="style.css" rel="stylesheet"/>
+ </head>
+ <body class="testimonis">
   <!-- Fixed header -->
   <header class="site-header">
-    <div class="header-content">
-      <nav class="nav">
-        <a href="valors.html">Valors</a>
-        <a href="quisom.html">Qui Som</a>
-        <a href="projectes.html">Projectes</a>
-        <a href="testimonis.html" class="active">Testimonis</a>
-      </nav>
-      <h1 class="title"><a href="index.html">Les Penelopes</a></h1>
-    </div>
+   <a class="lang-pill" href="#" hreflang="en" id="langToggle" lang="en">
+    EN
+   </a>
+   <div class="header-content">
+    <nav class="nav">
+     <a data-i18n="nav.quefem" href="valors.html">
+      Què fem
+     </a>
+     <a data-i18n="nav.quisom" href="quisom.html">
+      Qui Som
+     </a>
+     <a data-i18n="nav.projectes" href="projectes.html">
+      Projectes
+     </a>
+     <a class="active" data-i18n="nav.testimonis" href="testimonis.html">
+      Testimonis
+     </a>
+    </nav>
+    <h1 class="title" data-i18n="site.title">
+     <a href="index.html">
+      Penelopes
+     </a>
+    </h1>
+   </div>
   </header>
-
   <main class="content">
-    <div class="content-wrapper">
-
-      <section class="t-grid">
-        <!-- Card 1 -->
-        <article class="t-card" style="--rot:-6deg;">
-          <h3 class="t-name">Nom Persona</h3>
-          <blockquote class="t-quote">
-            “Lorem ipsum dolor sit amet consectetur. Elementum dignissim nisl tortor
+   <div class="content-wrapper">
+    <section class="t-grid">
+     <!-- Card 1 -->
+     <article class="t-card" style="--rot:-6deg;">
+      <h3 class="t-name">
+       Nom Persona
+      </h3>
+      <blockquote class="t-quote">
+       “Lorem ipsum dolor sit amet consectetur. Elementum dignissim nisl tortor
             suspendisse sodales aliquam. Egestas ante feugiat vivamus ac tristique mi
             lacinia. Viverra aliquet aliquam ac fermentum blandit morbi nullam amet.”
-          </blockquote>
-          <small class="t-org">institució…</small>
-        </article>
-
-        <!-- Card 2 -->
-        <article class="t-card" style="--rot:5.5deg;">
-          <h3 class="t-name">Nom Persona</h3>
-          <blockquote class="t-quote">
-            “Lorem ipsum dolor sit amet consectetur. Elementum dignissim nisl tortor
+      </blockquote>
+      <small class="t-org">
+       institució…
+      </small>
+     </article>
+     <!-- Card 2 -->
+     <article class="t-card" style="--rot:5.5deg;">
+      <h3 class="t-name">
+       Nom Persona
+      </h3>
+      <blockquote class="t-quote">
+       “Lorem ipsum dolor sit amet consectetur. Elementum dignissim nisl tortor
             suspendisse sodales aliquam. Egestas ante feugiat vivamus ac tristique mi
             lacinia. Viverra aliquet aliquam ac fermentum blandit morbi nullam amet.”
-          </blockquote>
-          <small class="t-org">institució…</small>
-        </article>
-
-        <!-- Card 3 -->
-        <article class="t-card" style="--rot:-4.5deg;">
-          <h3 class="t-name">Nom Persona</h3>
-          <blockquote class="t-quote">
-            “Lorem ipsum dolor sit amet consectetur. Elementum dignissim nisl tortor
+      </blockquote>
+      <small class="t-org">
+       institució…
+      </small>
+     </article>
+     <!-- Card 3 -->
+     <article class="t-card" style="--rot:-4.5deg;">
+      <h3 class="t-name">
+       Nom Persona
+      </h3>
+      <blockquote class="t-quote">
+       “Lorem ipsum dolor sit amet consectetur. Elementum dignissim nisl tortor
             suspendisse sodales aliquam. Egestas ante feugiat vivamus ac tristique mi
             lacinia. Viverra aliquet aliquam ac fermentum blandit morbi nullam amet.”
-          </blockquote>
-          <small class="t-org">institució…</small>
-        </article>
-
-        <!-- Card 4 -->
-        <article class="t-card" style="--rot:4deg;">
-          <h3 class="t-name">Nom Persona</h3>
-          <blockquote class="t-quote">
-            “Lorem ipsum dolor sit amet consectetur. Elementum dignissim nisl tortor
+      </blockquote>
+      <small class="t-org">
+       institució…
+      </small>
+     </article>
+     <!-- Card 4 -->
+     <article class="t-card" style="--rot:4deg;">
+      <h3 class="t-name">
+       Nom Persona
+      </h3>
+      <blockquote class="t-quote">
+       “Lorem ipsum dolor sit amet consectetur. Elementum dignissim nisl tortor
             suspendisse sodales aliquam. Egestas ante feugiat vivamus ac tristique mi
             lacinia. Viverra aliquet aliquam ac fermentum blandit morbi nullam amet.”
-          </blockquote>
-          <small class="t-org">institució…</small>
-        </article>
-      </section>
-
-    </div>
+      </blockquote>
+      <small class="t-org">
+       institució…
+      </small>
+     </article>
+    </section>
+   </div>
   </main>
-</body>
+  <script>
+   (function(){
+  var LANGS = ['ca','en'];
+  function getLang(){
+    var p = new URLSearchParams(location.search).get('lang');
+    if (p && LANGS.includes(p)) return p;
+    var s = localStorage.getItem('lang');
+    if (s && LANGS.includes(s)) return s;
+    return 'ca';
+  }
+  function setLang(lang){
+    localStorage.setItem('lang', lang);
+    var url = new URL(location.href);
+    url.searchParams.set('lang', lang);
+    location.replace(url.toString());
+  }
+  function apply(dict){
+    try { document.documentElement.setAttribute('lang', current); } catch(e) {}
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if (dict[key]) el.textContent = dict[key];
+    });
+    // update pill label
+    var pill = document.getElementById('langToggle') || document.querySelector('.lang-pill');
+    if (pill){
+      var next = (current==='ca' ? 'EN' : 'CA');
+      pill.textContent = next;
+      pill.setAttribute('lang', current==='ca' ? 'en' : 'ca');
+      pill.setAttribute('hreflang', current==='ca' ? 'en' : 'ca');
+    }
+  }
+  var current = getLang();
+  var loc = 'locales/' + current + '.json';
+  fetch(loc).then(function(r){return r.json();}).then(function(dict){ apply(dict); });
+  document.addEventListener('DOMContentLoaded', function(){
+    var pill = document.getElementById('langToggle') || document.querySelector('.lang-pill');
+    if (pill){
+      pill.addEventListener('click', function(ev){
+        ev.preventDefault();
+        setLang(current==='ca' ? 'en' : 'ca');
+      });
+    }
+  });
+})();
+  </script>
+ </body>
 </html>
