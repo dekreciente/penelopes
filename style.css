@@ -7,13 +7,10 @@
 
 *,
 *::before,
-*::after {
-  box-sizing: border-box;
-}
+*::after { box-sizing: border-box; }
 
 /* === GLOBAL VARIABLES === */
 :root {
-  /* adjust these numbers as needed */
   --header-gap: clamp(240px, 26vh, 360px);
 }
 
@@ -34,10 +31,11 @@ html, body {
   color: #111;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* allow inner wrappers to overflow without causing sideways scroll */
+  overflow-x: hidden;
 }
 
 /* === Boton cambiar idioma === */
-/* Default: top right for desktops */
 .lang-pill{
   position: absolute;
   top: 12px;
@@ -56,7 +54,6 @@ html, body {
 }
 .lang-pill:hover{ background:#E3609F; color:#fff9b0; }
 
-/* On smartphones: fix it bottom-right instead */
 @media (max-width: 768px) {
   .lang-pill{
     position: fixed;
@@ -69,25 +66,22 @@ html, body {
   }
 }
 
-/* Fixed Header */
+/* === Fixed Header === */
 .site-header {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   min-height: var(--header-gap);
-  background-color: transparent;
+  background-color: #E3609F;
   z-index: 1000;
   display: flex;
   justify-content: center;
   text-align: left;
   transition: background-color 0.3s ease;
-  background-color: #E3609F;
+  /* respect iOS safe areas so the title doesn’t get clipped */
+  padding-top: max(12px, env(safe-area-inset-top));
 }
 
-.header-content {
-  padding: 50px 0 20px;
-}
+.header-content { padding: 50px 0 20px; }
 
 /* Nav bar */
 .nav {
@@ -98,7 +92,6 @@ html, body {
   font-size: 28px;
   margin-bottom: 8px;
 }
-
 .nav a {
   text-decoration: none;
   color: inherit;
@@ -108,12 +101,9 @@ html, body {
   background-color: rgba(255, 249, 176, 0.15);
   display: inline-block;
 }
+.nav a:hover { background-color: #fff9b0; color: #E3609F; }
 
-.nav a:hover {
-  background-color: #fff9b0;
-  color: #E3609F;
-}
-
+/* Title */
 .title {
   font-size: 110px;
   font-weight: normal;
@@ -121,29 +111,17 @@ html, body {
   margin: 0;
   font-weight: 800px;
 }
+.title a { text-decoration: none; color: inherit; display: inline-block; transition: color 0.2s ease; }
+.title a:hover { color: #ffffff; }
 
-.title a {
-  text-decoration: none;
-  color: inherit;
-  display: inline-block;
-  transition: color 0.2s ease;
-}
-
-.title a:hover {
-  color: #ffffff;
-}
-
-/* Content wrapper */
+/* === Content wrapper === */
 .content {
-  padding-top: var(--header-gap); /* consistent margin under header */
+  /* single base offset under the fixed header */
+  padding-top: calc(var(--header-gap) + 8px);
   display: flex;
   justify-content: center;
 }
-
-.content-wrapper {
-  width: 96vw;
-  max-width: 1080px;
-}
+.content-wrapper { width: 96vw; max-width: 1080px; }
 
 /* Homepage Rotated content */
 .rotated {
@@ -155,130 +133,75 @@ html, body {
   transition: color 0.3s ease;
   scroll-margin-top: 100px;
 }
-
 .rotated:hover { color: #ffffff; }
 .rotated.scrolled { color: #111; }
 .rotated p + p { margin-top: 50px; }
 
-/* === VALORS PAGE === */
+/* === VALORS (què fem) === */
+.valors .content {
+  /* extra breathing room so “1.” never kisses the header */
+  padding-top: calc(var(--header-gap) + 28px);
+}
 .valors-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 220px 80px;
   padding-bottom: 200px;
 }
-
 .valors-item {
   position: relative;
-  padding-top: 100px;
+  /* unified inner lead-in for all numbers (1., 2., 3., …) */
+  padding-top: clamp(150px, 24vw, 220px);
 }
-
 .valors-number {
   font-size: 4rem;
   color: #fff9b0;
   position: absolute;
   top: 0;
+  margin-top: 25px;
   left: -20px;
   font-weight: normal;
   pointer-events: none;
   animation: spin360 15s linear infinite;
-  transform-origin: center;
   transform: rotate(-6deg);
   transform-origin: left center;
 }
-
 .valors-text {
   font-size: 1.2rem;
   line-height: 1.6;
   color: #fff9b0;
 }
 
-/* ===== PROJECTES PAGE ===== */
-.projectes .content-wrapper {
-  width: 96vw;
-  max-width: 1200px;
-}
+/* ===== PROJECTES ===== */
+.projectes .content-wrapper { width: 96vw; max-width: 1200px; }
 
-/* make Projectes, Valors, and Projecte-template start the same distance from header */
-.valors .content,
-.projectes .content,
-.projecte .content {
-  padding-top: calc(var(--header-gap) - 56px);
-}
-
+/* Grid */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 56px;
   padding-bottom: 140px;
-  margin-top: 40px; /* extra breathing room below header/title */
+  margin-top: 40px;
   width: 96vw;
   max-width: 1080px;
   margin-left: auto;
   margin-right: auto;
 }
 
-/* Make entire project card clickable */
-.project-card a.project-link {
-  display: block;
-  color: inherit;
-  text-decoration: none;
-  height: 100%;
-}
-
-.project-card a.project-link:hover {
-  color: inherit; /* keeps hover clean */
-}
-
-/* Optional: add subtle hover effect to full card */
-.project-card:hover {
-  transform: translateY(-2px);
-  transition: transform 0.25s ease;
-}
-
+/* Project card */
+.project-card a.project-link { display: block; color: inherit; text-decoration: none; height: 100%; }
+.project-card a.project-link:hover { color: inherit; }
+.project-card:hover { transform: translateY(-2px); transition: transform 0.25s ease; }
 .project-card { color: #fff9b0; }
-.project-title {
-  margin: 0 0 8px;
-  font-size: 28px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  color: #fff9b0;
-}
-
-.project-meta {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  min-height: 80px;
-}
-
+.project-title { margin: 0 0 8px; font-size: 28px; font-weight: 600; letter-spacing: 0.02em; color: #fff9b0; }
+.project-meta { display: flex; align-items: center; gap: 18px; min-height: 80px; }
 .project-year { font-size: 16px; color: #fff9b0; }
-
-/* Curved label (SVG) */
 .project-arc { width: 220px; height: 70px; overflow: visible; }
-.project-arc text {
-  font-size: 30px;
-  fill: #fff9b0;
-}
-
-/* Media */
+.project-arc text { font-size: 30px; fill: #fff9b0; }
 .project-media { margin: 10px 0 0; border-radius: 22px; overflow: hidden; }
-.project-media img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 22px;
-}
-
-/* Hover */
-.project-card:hover .project-media img {
-  transform: translateY(-2px);
-  transition: transform 0.25s ease;
-}
-.project-card:hover .project-media {
-  box-shadow: 0 0 0 3px rgba(255, 249, 176, 0.45);
-  transition: box-shadow 0.25s ease;
-}
+.project-media img { display: block; width: 100%; height: auto; border-radius: 22px; }
+.project-card:hover .project-media img { transform: translateY(-2px); transition: transform 0.25s ease; }
+.project-card:hover .project-media { box-shadow: 0 0 0 3px rgba(255, 249, 176, 0.45); transition: box-shadow 0.25s ease; }
 
 /* Active nav style */
 .nav .active { background-color: #fff9b0; color: #ff5ec4; }
@@ -298,10 +221,8 @@ html, body {
   .title { font-size: clamp(38px, 12vw, 56px); line-height: 1.06; }
   .header-content { padding: 24px 0 12px; }
 
+  /* base content spacing at this size */
   .content { padding-top: calc(var(--header-gap) - 24px); }
-  .projectes .content,
-  .valors .content,
-  .projecte .content { padding-top: calc(var(--header-gap) - 56px); }
 
   .nav {
     font-size: 16px;
@@ -316,10 +237,11 @@ html, body {
   .nav::-webkit-scrollbar { display: none; }
   .nav a { flex: 0 0 auto; white-space: nowrap; padding: 6px 12px; }
 
-  .content-wrapper { padding: 0 14px; overflow-x: clip; }
+  /* IMPORTANT: allow rotated cards/shadows to overflow on mobile */
+  .content-wrapper { padding: 0 14px; overflow-x: visible; }
 
   .valors-grid { grid-template-columns: 1fr; gap: 60px; }
-  .valors-number { font-size: 3.2rem; top: -24px; left: 0; }
+  .valors-number { font-size: 3.2rem; top: -10px !important; left: 0; }
   .rotated { font-size: clamp(1.2rem, 4.6vw, 2rem); padding-bottom: 48px; }
 }
 
@@ -347,20 +269,16 @@ html, body {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.02);
 }
 
-/* Desktop-only breathing room */
+/* Desktop-only breathing room (page wrappers) */
 @media (min-width: 900px) {
   .projectes .content-wrapper,
   .valors .content-wrapper,
-  .projecte .content-wrapper {
-    margin-top: 48px !important;
-  }
+  .projecte .content-wrapper { margin-top: 48px !important; }
 }
 @media (max-width: 768px) {
   .projectes .content-wrapper,
   .valors .content-wrapper,
-  .projecte .content-wrapper {
-    margin-top: 0 !important;
-  }
+  .projecte .content-wrapper { margin-top: 0 !important; }
 }
 
 /* ===== PROJECT HEADER BAND ===== */
@@ -371,23 +289,16 @@ html, body {
   align-items: end;
   margin: 6px 0 16px;
 }
-
 .proj-num {
   font-size: clamp(48px, 8vw, 120px);
   line-height: 0.88;
+  margin-top: 10px;
   color: #fff9b0;
   transform: rotate(-6deg);
   transform-origin: left center;
 }
-
 .proj-meta { align-self: center; }
-.proj-title {
-  margin: 0 0 6px;
-  font-size: clamp(28px, 4.8vw, 56px);
-  font-weight: 600;
-  letter-spacing: .01em;
-  color: #fff9b0;
-}
+.proj-title { margin: 0 0 6px; font-size: clamp(28px, 4.8vw, 56px); font-weight: 600; letter-spacing: .01em; color: #fff9b0; }
 .proj-year { margin: 0; font-size: 20px; color: #fff9b0; opacity: .95; }
 
 /* ===== TEXT LEFT · IMAGE RIGHT ===== */
@@ -400,12 +311,7 @@ html, body {
 }
 .proj-left { color: #fff9b0; }
 .proj-intro p { line-height: 1.65; margin: 0 0 14px; }
-
-.proj-right {
-  border-radius: 22px;
-  overflow: hidden;
-  box-shadow: 0 10px 40px rgba(0,0,0,.18);
-}
+.proj-right { border-radius: 22px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,.18); }
 .proj-right img { width: 100%; height: auto; border-radius: 22px; }
 
 .back-button {
@@ -422,7 +328,7 @@ html, body {
 }
 .back-button:hover { background-color: #fff8b0a1; color: #fff9b0; }
 
-/* Responsive */
+/* Responsive (project detail) */
 @media (max-width: 1024px) {
   .proj-head { grid-template-columns: 1fr; gap: 12px; }
   .proj-row  { grid-template-columns: 1fr; gap: 22px; }
@@ -431,34 +337,20 @@ html, body {
   .proj-right, .proj-right img { border-radius: 14px; }
 }
 
-/* Desktop: make ONLY the project template sit lower under the header */
+/* Projecte spacing */
 @media (min-width: 900px) {
-  .projecte .content {
-    /* add extra breathing room vs the default */
-    padding-top: calc(var(--header-gap) + 48px) !important; /* adjust 32–72px to taste */
-  }
+  .projecte .content { padding-top: calc(var(--header-gap) + 48px) !important; }
 }
-
-/* Tablets/phones: keep your existing tighter spacing */
 @media (max-width: 768px) {
-  .projecte .content {
-    /* match what you do on other pages at small sizes */
-    padding-top: calc(var(--header-gap) - 10px) !important;
-  }
+  .projecte .content { padding-top: calc(var(--header-gap) - 10px) !important; }
 }
 
-/* Desktop: give Projectes breathing room under the header */
+/* Projectes spacing */
 @media (min-width: 900px) {
-  .projectes .content {
-    padding-top: calc(var(--header-gap) + 20px) !important; /* adjust 32–72px */
-  }
+  .projectes .content { padding-top: calc(var(--header-gap) + 20px) !important; }
 }
-
-/* Keep tablets/phones tighter */
 @media (max-width: 768px) {
-  .projectes .content {
-    padding-top: calc(var(--header-gap) - 20px) !important;
-  }
+  .projectes .content { padding-top: calc(var(--header-gap) - 20px) !important; }
 }
 
 /* =========================
@@ -466,36 +358,29 @@ html, body {
    ========================= */
 .quisom .content { padding-top: calc(var(--header-gap) - 56px); }
 
-/* container that holds the three cards */
 .qs-stack {
   position: relative;
-  padding-bottom: 20vh; /* room after the last card */
+  padding-bottom: 20vh;
+  margin-top: 35px;
 }
 
-/* big pastel cards — smaller */
 .qs-card {
   --rot: -6deg;
   --y: 0px;
-
-  width: clamp(280px, 60vw, 560px);   /* was min(760px, 92vw) */
+  width: clamp(280px, 60vw, 560px);
   background: #ffd1ec;
   color: #111;
-  border-radius: 22px;                /* was 30px */
+  border-radius: 22px;
   padding: clamp(14px, 2.4vw, 22px) clamp(16px, 3vw, 26px);
   margin: 0 auto;
   transform: translateY(var(--y)) rotate(var(--rot));
-  box-shadow: 0 14px 40px rgba(0,0,0,.18); /* slightly lighter */
+  box-shadow: 0 14px 40px rgba(0,0,0,.18);
   transition: transform .25s ease, box-shadow .25s ease;
   text-align: center;
 }
-
 .qs-card + .qs-card { margin-top: 80px; }
+.qs-card:hover { box-shadow: 0 22px 60px rgba(0,0,0,0.22); }
 
-.qs-card:hover {
-  box-shadow: 0 22px 60px rgba(0,0,0,0.22);
-}
-
-/* card content */
 .qs-card-head {
   font-size: clamp(16px, 1.2rem, 22px);
   font-weight: 700;
@@ -507,32 +392,16 @@ html, body {
   color: #111;
   line-height: 1.5;
 }
-.qs-mail {
-  color: #111;
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
-}
+.qs-mail { color: #111; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
 .qs-mail:hover { color: #E3609F; }
 
 /* squiggly connectors (desktop only) */
 .qs-squigs {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  mix-blend-mode: normal;
-  display: none; /* hidden by default, enabled on desktop below */
+  position: absolute; inset: 0; pointer-events: none; mix-blend-mode: normal; display: none;
 }
-.qs-squig {
-  fill: none;
-  stroke: #fff9b0;
-  stroke-width: 2.5;
-  opacity: .9;
-}
+.qs-squig { fill: none; stroke: #fff9b0; stroke-width: 2.5; opacity: .9; }
 
-/* ---------- Responsive ---------- */
-
-/* Desktop: show squiggles and spread cards more like the mock */
+/* Qui Som responsive */
 @media (min-width: 1024px) {
   .qs-squigs { display: block; }
   .qs-card { width: min(880px, 72vw); border-radius: 36px; }
@@ -540,20 +409,15 @@ html, body {
   .qs-card-body { padding: 0 32px 34px; }
   .qs-card + .qs-card { margin-top: 120px; }
 }
-
-/* Tablets: keep tilt but tighten spacing */
 @media (max-width: 1023px) and (min-width: 641px) {
   .qs-card { width: min(760px, 86vw); }
 }
-
-/* Phones: reduce rotation, stack compactly, no squiggles */
 @media (max-width: 640px) {
   .qs-squigs { display: none; }
   .qs-card {
     width: 92vw;
     border-radius: 22px;
-    transform: translateY(0) rotate(-2deg) !important; /* gentle tilt */
-    /* keep cards closer on mobile */
+    transform: translateY(0) rotate(-2deg) !important;
   }
   .qs-card + .qs-card { margin-top: 26px; }
   .qs-card-head { padding: 16px 18px 4px; }
@@ -568,39 +432,28 @@ html, body {
   .quisom .content-wrapper { margin-top: 0 !important; }
 }
 
-/* QUI SOM: more space under the header (desktop), tighter on small screens */
+/* QUI SOM: more space under header (desktop), tighter on small screens */
 @media (min-width: 900px) {
-  .quisom .content {
-    padding-top: calc(var(--header-gap) + 72px) !important;
-  }
+  .quisom .content { padding-top: calc(var(--header-gap) + 72px) !important; }
 }
 @media (max-width: 768px) {
-  .quisom .content {
-    padding-top: calc(var(--header-gap) - 24px) !important;
-  }
+  .quisom .content { padding-top: calc(var(--header-gap) - 24px) !important; }
 }
 
 /* QUI SOM — smaller cards on desktop only */
 @media (min-width: 1024px) {
   .quisom .qs-card {
-    width: min(520px, 50vw);   /* was ~760px */
-    border-radius: 22px;       /* a touch tighter */
-    padding: 18px 22px;        /* slightly less padding */
+    width: min(520px, 50vw);
+    border-radius: 22px;
+    padding: 18px 22px;
     box-shadow: 0 14px 36px rgba(0,0,0,.18);
   }
-  .quisom .qs-card + .qs-card {
-    margin-top: 80px;          /* keep spacing pleasant */
-  }
+  .quisom .qs-card + .qs-card { margin-top: 80px; }
 }
 
-/* === TESTIMONIS PAGE === */
+/* === TESTIMONIS === */
+.testimonis .content { padding-top: calc(var(--header-gap) - 56px); }
 
-/* same header distance as Valors/Projectes (base) */
-.testimonis .content {
-  padding-top: calc(var(--header-gap) - 56px);
-}
-
-/* grid stack (single column, big vertical rhythm) */
 .t-grid {
   display: grid;
   gap: 120px;
@@ -608,76 +461,48 @@ html, body {
   justify-items: center;
   padding-bottom: 140px;
 }
-
-/* soft lilac card; tweak width if you want smaller/bigger */
 .t-card {
-  --rot: -5deg;                     /* per-card override inline */
-  background: #d9c0ff;              /* lilac against the pink */
+  --rot: -5deg;
+  margin-top: 75px;
+  background: #d9c0ff;
   color: #1d1333;
   border-radius: 36px;
-  width: min(860px, 94vw);          /* <<< desktop size */
+  width: min(860px, 94vw);
   padding: clamp(22px, 4.2vw, 48px) clamp(20px, 4vw, 56px);
   transform: rotate(var(--rot));
   box-shadow: 0 16px 60px rgba(0,0,0,.20);
 }
+.t-name { margin: 0 0 12px 0; color: #1d1333; font-size: clamp(20px, 2.2vw, 28px); letter-spacing: .01em; }
+.t-quote { margin: 0; font-size: clamp(16px, 1.8vw, 22px); line-height: 1.55; }
+.t-org { display: block; margin-top: 16px; font-size: 12px; opacity: .7; text-align: center; }
 
-/* text inside cards */
-.t-name {
-  margin: 0 0 12px 0;
-  color: #1d1333;
-  font-size: clamp(20px, 2.2vw, 28px);
-  letter-spacing: .01em;
-}
-
-.t-quote {
-  margin: 0;
-  font-size: clamp(16px, 1.8vw, 22px);
-  line-height: 1.55;
-}
-
-.t-org {
-  display: block;
-  margin-top: 16px;
-  font-size: 12px;
-  opacity: .7;
-  text-align: center;
-}
-
-/* Tablet tweaks */
 @media (max-width: 1024px) {
   .t-grid { gap: 90px; }
   .t-card { width: min(760px, 94vw); border-radius: 28px; }
 }
-
-/* Phone tweaks: slightly smaller, lighter angles for readability */
 @media (max-width: 640px) {
   .t-grid { gap: 64px; }
   .t-card {
     width: 92vw;
-    transform: rotate(calc(var(--rot) * 0.45)); /* reduce tilt on small screens */
+    transform: rotate(calc(var(--rot) * 0.45));
     border-radius: 22px;
     padding: 18px 18px 22px;
   }
   .t-org { margin-top: 10px; }
 }
 
-/* Testimonis: more space below the fixed header on desktop */
+/* Testimonis spacing */
 @media (min-width: 900px) {
-  .testimonis .content {
-    padding-top: calc(var(--header-gap) + 96px) !important;
-  }
+  .testimonis .content { padding-top: calc(var(--header-gap) + 96px) !important; }
 }
-
-/* Phones/tablets: keep your existing tighter spacing */
 @media (max-width: 899px) {
-  .testimonis .content {
-    padding-top: calc(var(--header-gap) - 56px) !important;
-  }
+  .testimonis .content { padding-top: calc(var(--header-gap) - 56px) !important; }
 }
 
-/* Phones: comfy side gutters and card sizing inside wrapper */
+/* Phones: comfy side gutters for both pages with rotated cards */
 @media (max-width: 640px) {
-  .testimonis .content-wrapper {
+  .testimonis .content-wrapper,
+  .quisom .content-wrapper {
     padding-left:  max(8px, env(safe-area-inset-left));
     padding-right: max(22px, env(safe-area-inset-right));
   }
@@ -690,53 +515,28 @@ html, body {
     transform: rotate(var(--rot));
     border-radius: 18px;
   }
-
   .testimonis .testimonial-card:nth-child(odd)  { transform: rotate(var(--rot)) translateX(-4px); }
   .testimonis .testimonial-card:nth-child(even) { transform: rotate(calc(var(--rot) * -1)) translateX(4px); }
 }
 
-/* === Allow last items on every main page to scroll to the very top === */
-
-/* Testimonis */
-.testimonis .t-grid::after {
-  content: "";
-  display: block;
-  height: calc(100vh - var(--header-gap));
-}
-
-/* Projectes (grid) */
-.projectes .projects-grid::after {
-  content: "";
-  display: block;
-  height: calc(100vh - var(--header-gap));
-}
-
-/* Valors (grid) */
-.valors .valors-grid::after {
-  content: "";
-  display: block;
-  height: calc(100vh - var(--header-gap));
-}
-
-/* Qui Som (stack of cards) */
-.quisom .qs-stack::after {
-  content: "";
-  display: block;
-  /* more tail room so the last card can scroll under the fixed header */
-  height: max(40vh, calc(100vh - var(--header-gap) + 120px));
-}
-
-.quisom .qs-card {
-  scroll-margin-top: calc(var(--header-gap) + 72px);
-}
-/* Single Projecte template */
+/* === Allow last items on each page to scroll to the top === */
+.testimonis .t-grid::after,
+.projectes .projects-grid::after,
+.valors .valors-grid::after,
 .projecte .content-wrapper::after {
   content: "";
   display: block;
   height: calc(100vh - var(--header-gap));
 }
 
-/* On phones, we don’t need as much tail space */
+/* Qui Som (stack of cards) tail room */
+.quisom .qs-stack::after {
+  content: "";
+  display: block;
+  height: max(40vh, calc(100vh - var(--header-gap) + 120px));
+}
+.quisom .qs-card { scroll-margin-top: calc(var(--header-gap) + 72px); }
+
 @media (max-width: 640px) {
   .quisom .qs-stack::after {
     height: max(24vh, calc(100vh - var(--header-gap) + 40px));
@@ -746,7 +546,8 @@ html, body {
   }
 }
 
-/* (Removed conflicting global override that forced padding-top:0 and margin-top:300px) */
+/* Anchors land clear of the fixed header everywhere */
+html { scroll-padding-top: calc(var(--header-gap) + 24px); }
 
 /* === Footer === */
 .minimal-footer {
@@ -756,7 +557,6 @@ html, body {
   font-size: 14px;
   padding: 20px 0;
 }
-
 .footer-container {
   max-width: 1080px;
   margin: 0 auto;
@@ -768,33 +568,93 @@ html, body {
   align-items: center;
   text-align: center;
 }
+.footer-container a { color: #fff9b0; text-decoration: none; transition: color 0.2s ease; }
+.footer-container a:hover { color: #ffffff; }
 
-.footer-container a {
-  color: #fff9b0;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.footer-container a:hover {
-  color: #ffffff;
-}
-
-/* === Responsive Styles === */
 @media (max-width: 768px) {
-  .footer-container {
-    flex-direction: column;
-    gap: 10px;
-  }
+  .footer-container { flex-direction: column; gap: 10px; }
 }
-
 @media (max-width: 480px) {
-  .minimal-footer {
-    font-size: 12px;
-    padding: 15px 0;
-  }
-
-  .footer-container {
-    gap: 8px;
-  }
+  .minimal-footer { font-size: 12px; padding: 15px 0; }
+  .footer-container { gap: 8px; }
 }
+
+/* === Phone-only: slightly shorter header band for small phones === */
+@media (max-width: 640px){
+  :root { --header-gap: clamp(168px, 22vh, 220px); }
+  .header-content { padding: 18px 0 10px; }
+}
+
+
+/* === FIX HEADER ON SMALL SCREENS === */
+
+/* Small tablet / phablet */
+@media (max-width: 768px) {
+  :root { --header-gap: clamp(200px, 24vh, 260px); }
+
+  .title { font-size: clamp(36px, 10.8vw, 52px); line-height: 1.02; }
+  .header-content { padding: 18px 0 10px; }
+
+  .content { padding-top: calc(var(--header-gap) - 24px); }
+
+  .nav {
+    font-size: 15px;
+    gap: 6px;
+  }
+  .nav a { padding: 6px 10px; }
+
+  /* Let rotated cards/shadows overflow without clipping */
+  .content-wrapper { overflow-x: visible; }
+}
+
+/* Phone */
+@media (max-width: 640px) {
+  :root { --header-gap: clamp(140px, 18vh, 190px); }
+
+  .header-content { padding: 12px 0 8px; }
+  .title { font-size: clamp(30px, 9.8vw, 42px); line-height: 1.02; }
+
+  .nav { font-size: 13px; gap: 6px; }
+  .nav a { padding: 6px 9px; }
+}
+
+
+
+
+
+/* ==== INDEX (home) — one screen, no scrollbar ==== */
+/* add class="home" on <body> */
+
+.home .content{
+  /* remove the extra +8px buffer you add globally */
+  padding-top: 92px !important;
+}
+
+.home .content-wrapper{
+  /* make the hero exactly the remaining viewport height */
+  min-height: calc(100vh - var(--header-gap));
+  display: grid;
+  align-content: center;   /* vertically centers the paragraph */
+}
+
+.home .rotated{
+  /* the extra 80px bottom padding was causing the tiny scroll */
+  padding-bottom: 0 !important;
+}
+
+.home .rotated p{
+  /* ensure no default bottom margin sneaks in */
+  margin: 0;
+}
+
+/* absolutely kill any “tail” spacers if present */
+.home .content-wrapper::after{ display:none !important; height:0 !important; }
+
+
+
+
+
+
+
+
 
